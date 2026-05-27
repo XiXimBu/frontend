@@ -1,40 +1,247 @@
-/* CSS bổ sung ngoài Bootstrap */
+/* Gadget Store – giao diện tối (Bootstrap + bổ sung) */
 
-body {
-  background-color: #f5f7fa;
+:root {
+  --bg: #131313;
+  --surface: #20201f;
+  --surface-high: #2a2a2a;
+  --text: #e5e2e1;
+  --text-muted: #8e9192;
+  --accent: #0566d9;
+  --accent-light: #adc6ff;
+  --border: rgba(255, 255, 255, 0.1);
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+}
+
+body.store-page {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.store-page .navbar {
+  background: rgba(19, 19, 19, 0.85) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.store-page .navbar-brand,
+.store-page .nav-link {
+  color: var(--text) !important;
+}
+
+.store-page .nav-link:hover {
+  color: var(--accent-light) !important;
+}
+
+.store-hero {
+  position: relative;
+  padding: 5rem 0 3rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.store-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(5, 102, 217, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(173, 198, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.store-hero .hero-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  background: rgba(5, 102, 217, 0.2);
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.store-hero .hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.store-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.store-hero .gradient-text {
+  background: linear-gradient(90deg, var(--accent-light), #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.filter-bar {
+  background: rgba(26, 26, 26, 0.75);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+}
+
+.store-page .form-control,
+.store-page .form-select {
+  background: var(--surface-high);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.store-page .form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.store-page .form-control:focus,
+.store-page .form-select:focus {
+  background: var(--surface-high);
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 0.2rem rgba(5, 102, 217, 0.25);
 }
 
 .product-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  height: 100%;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
 }
 
 .product-card .card-img-top {
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  background-color: #fff;
+  background: var(--surface-high);
+}
+
+.product-card .card-body {
+  padding: 1.25rem;
 }
 
 .product-price {
-  color: #d9534f;
-  font-weight: 600;
+  color: var(--accent-light);
+  font-weight: 700;
+  font-size: 1.15rem;
 }
 
-.star-rating {
-  color: #f5b301;
+.product-card .btn-detail {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+}
+
+.product-card .btn-detail:hover {
+  background: #0455b8;
+  color: #fff;
+}
+
+.product-card .btn-compare {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.product-card .btn-compare:hover {
+  background: var(--surface-high);
+  color: var(--accent-light);
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.panel-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.compare-table {
+  color: var(--text);
 }
 
 .compare-table th,
 .compare-table td {
   vertical-align: middle;
   text-align: center;
+  border-color: var(--border);
 }
 
 .review-card {
-  border-left: 4px solid #0d6efd;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+}
+
+.star-rating {
+  color: #f5b301;
+}
+
+.store-footer {
+  background: #0e0e0e;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.store-page .modal-content {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.store-page .modal-header {
+  border-bottom-color: var(--border);
+}
+
+.store-page .btn-close {
+  filter: invert(1);
+}
+
+.store-page .table {
+  color: var(--text);
+}
+
+.store-page .text-muted {
+  color: var(--text-muted) !important;
+}
+
+.store-page #productList > p.text-muted {
+  grid-column: 1 / -1;
+}
+
+#productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+#productList > .product-col {
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .filter-bar {
+    border-radius: var(--radius-lg);
+  }
 }

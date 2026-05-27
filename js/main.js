@@ -84,20 +84,28 @@ function renderProducts() {
   }
 
   list.forEach((p) => {
+    const spec = [p.cpu, p.ram].filter(Boolean).join(" · ");
     const html =
-      '<div class="col-md-4 col-lg-3">' +
-      '  <div class="card product-card h-100" data-id="' + p.id + '">' +
-      '    <img src="' + (p.image || "img/no-image.png") + '" class="card-img-top" alt="">' +
+      '<div class="product-col">' +
+      '  <div class="card product-card" data-id="' + p.id + '">' +
+      '    <img src="' + escapeHtml(p.image || "img/no-image.png") + '" class="card-img-top" alt="">' +
       '    <div class="card-body d-flex flex-column">' +
-      '      <h6 class="card-title">' + escapeHtml(p.name) + '</h6>' +
-      '      <p class="product-price mb-2">' + formatMoney(p.price) + '</p>' +
+      '      <span class="badge bg-secondary align-self-start mb-2">' +
+      escapeHtml(p.category || "") +
+      "</span>" +
+      '      <h6 class="card-title fw-bold">' + escapeHtml(p.name) + "</h6>" +
+      (spec
+        ? '<p class="small text-muted mb-2">' + escapeHtml(spec) + "</p>"
+        : "") +
+      '      <p class="product-price mb-3">' + formatMoney(p.price) + "</p>" +
       '      <div class="mt-auto d-flex gap-2">' +
-      '        <button class="btn btn-sm btn-outline-primary flex-grow-1 btn-detail">Chi tiết</button>' +
-      '        <button class="btn btn-sm btn-outline-success btn-compare" title="So sánh"><i class="bi bi-bar-chart"></i></button>' +
-      '      </div>' +
-      '    </div>' +
-      '  </div>' +
-      '</div>';
+      '        <button type="button" class="btn btn-sm btn-detail flex-grow-1">Chi tiết</button>' +
+      '        <button type="button" class="btn btn-sm btn-outline-secondary btn-compare rounded-circle px-2" title="So sánh">' +
+      '<i class="bi bi-bar-chart"></i></button>' +
+      "      </div>" +
+      "    </div>" +
+      "  </div>" +
+      "</div>";
     $wrap.append(html);
   });
 
@@ -195,7 +203,7 @@ function renderCompare() {
     "</tr>";
   html += "</tbody></table>";
   html +=
-    '<button class="btn btn-sm btn-outline-danger" id="btnClearCompare">Xóa so sánh</button>';
+    '<button type="button" class="btn btn-sm btn-outline-danger mt-3" id="btnClearCompare">Xóa so sánh</button>';
   $box.html(html);
   $("#btnClearCompare").on("click", function () {
     compareList = [];
@@ -220,18 +228,18 @@ function renderReviews(list) {
       '<span class="text-muted">' + "☆".repeat(Math.max(0, 5 - rating)) + "</span>" +
       "</span>";
     const html =
-      '<div class="col-md-6">' +
-      '  <div class="card review-card p-3">' +
-      '    <div class="d-flex justify-content-between align-items-center">' +
+      '<div class="col-md-6 col-lg-4">' +
+      '  <div class="review-card p-3 h-100">' +
+      '    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">' +
       '      <strong>' + escapeHtml(r.reviewerName || "Ẩn danh") + "</strong>" +
-      "      " + stars +
+      '      <span class="star-rating small">' + stars + "</span>" +
       "    </div>" +
       (productName
-        ? '    <small class="text-muted">' +
+        ? '<div class="small text-muted mb-2"><i class="bi bi-box-seam me-1"></i>' +
           escapeHtml(productName) +
-          "</small>"
+          "</div>"
         : "") +
-      '    <p class="mb-0 mt-2">' + escapeHtml(r.comment || "") + "</p>" +
+      '    <p class="mb-0">' + escapeHtml(r.comment || "") + "</p>" +
       "  </div>" +
       "</div>";
     $wrap.append(html);

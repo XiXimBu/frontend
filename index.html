@@ -15,11 +15,11 @@
   />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="store-page">
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <i class="bi bi-shop"></i> Gadget Store
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="bi bi-cpu"></i> Gadget Store
       </a>
       <button
         class="navbar-toggler"
@@ -31,35 +31,62 @@
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="#products">Sản phẩm</a></li>
-          <li class="nav-item"><a class="nav-link" href="#compare">So sánh</a></li>
-          <li class="nav-item"><a class="nav-link" href="#reviews">Đánh giá</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Sản phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#compare">So sánh</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#reviews">Đánh giá</a>
+          </li>
         </ul>
-        <a href="admin.html" class="btn btn-outline-light btn-sm">
+        <a href="admin.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
           <i class="bi bi-gear"></i> Quản trị
         </a>
       </div>
     </div>
   </nav>
 
-  <header class="bg-primary text-white py-4">
-    <div class="container">
-      <h1 class="h3 mb-3">Khám phá sản phẩm công nghệ</h1>
-      <div class="row g-2">
-        <div class="col-md-6">
-          <input
-            id="searchInput"
-            type="text"
-            class="form-control"
-            placeholder="Tìm kiếm sản phẩm..."
-          />
+  <header class="store-hero">
+    <div class="hero-orb" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="text-uppercase small text-muted mb-2 letter-spacing-2">
+        Công nghệ cao cấp
+      </p>
+      <h1 class="mb-3">
+        Khám phá thiết bị<br />
+        <span class="gradient-text">công nghệ hôm nay</span>
+      </h1>
+      <p class="text-muted mx-auto mb-0" style="max-width: 36rem">
+        Laptop, điện thoại và phụ kiện chính hãng — lọc, so sánh và xem đánh giá
+        thật từ khách hàng.
+      </p>
+    </div>
+  </header>
+
+  <div class="container mb-4">
+    <div class="filter-bar">
+      <div class="row g-2 align-items-center">
+        <div class="col-lg-5">
+          <div class="input-group">
+            <span class="input-group-text bg-transparent border-secondary text-muted">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              id="searchInput"
+              type="text"
+              class="form-control border-secondary"
+              placeholder="Tìm kiếm sản phẩm..."
+            />
+          </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
           <select id="categoryFilter" class="form-select">
             <option value="">Tất cả danh mục</option>
           </select>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4 col-lg-3">
           <select id="sortFilter" class="form-select">
             <option value="">Sắp xếp</option>
             <option value="priceAsc">Giá tăng dần</option>
@@ -69,38 +96,32 @@
         </div>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main class="container py-4">
-    <section id="products">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h4">Danh sách sản phẩm</h2>
+  <main class="container pb-5">
+    <section id="products" class="mb-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+        <h2 class="section-title mb-0">Sản phẩm nổi bật</h2>
         <span id="productCount" class="text-muted"></span>
       </div>
-      <div id="productList" class="row g-3">
+      <div id="productList"></div>
+    </section>
+
+    <section id="compare" class="mb-5">
+      <h2 class="section-title">So sánh sản phẩm</h2>
+      <div id="compareBox" class="panel-box table-responsive">
+        <p class="text-muted mb-0">Chọn tối đa 3 sản phẩm (nút biểu đồ trên thẻ) để so sánh.</p>
       </div>
     </section>
 
-    <section id="compare" class="mt-5">
-      <h2 class="h4 mb-3">So sánh sản phẩm</h2>
-      <div id="compareBox" class="table-responsive">
-        <p class="text-muted">Chọn sản phẩm để so sánh.</p>
-      </div>
-    </section>
-
-    <section id="reviews" class="mt-5">
-      <h2 class="h4 mb-3">Đánh giá mới nhất</h2>
+    <section id="reviews">
+      <h2 class="section-title">Đánh giá mới nhất</h2>
       <div id="reviewList" class="row g-3"></div>
     </section>
   </main>
 
-  <div
-    class="modal fade"
-    id="productModal"
-    tabindex="-1"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg">
+  <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="productModalTitle">Chi tiết sản phẩm</h5>
@@ -111,8 +132,13 @@
     </div>
   </div>
 
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    <small>&copy; 2026 Gadget Store</small>
+  <footer class="store-footer text-center py-4 mt-4">
+    <div class="container">
+      <div class="fw-bold text-white mb-1">
+        <i class="bi bi-cpu"></i> Gadget Store
+      </div>
+      <small>&copy; 2026 Gadget Store. All rights reserved.</small>
+    </div>
   </footer>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
