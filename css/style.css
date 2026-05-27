@@ -132,6 +132,15 @@ body.store-page {
 
 .product-card .card-body {
   padding: 1.25rem;
+  color: #fff;
+}
+
+.product-card .card-title {
+  color: #fff !important;
+}
+
+.product-card .card-body .text-muted {
+  color: rgba(255, 255, 255, 0.72) !important;
 }
 
 .product-price {
@@ -206,8 +215,21 @@ body.store-page {
 
 .store-page .modal-content {
   background: var(--surface);
-  color: var(--text);
+  color: #fff;
   border: 1px solid var(--border);
+}
+
+.store-page .modal-content .modal-title,
+.store-page .modal-content h4,
+.store-page .modal-content p,
+.store-page .modal-content th,
+.store-page .modal-content td {
+  color: #fff;
+}
+
+.store-page .modal-content .text-muted,
+.store-page .modal-content .product-price {
+  color: var(--accent-light) !important;
 }
 
 .store-page .modal-header {
