@@ -140,7 +140,7 @@ async function openProductDetail(id) {
       "    <h4>" + escapeHtml(product.name) + "</h4>" +
       '    <p class="product-price h5">' + formatMoney(product.price) + "</p>" +
       "    <p>" + escapeHtml(product.description || "") + "</p>" +
-      '    <table class="table table-sm">' +
+      '    <table class="table table-sm product-spec-table">' +
       specRow("Danh mục", product.category) +
       specRow("Màn hình", product.screen) +
       specRow("CPU", product.cpu) +

@@ -244,6 +244,48 @@ body.store-page {
   color: var(--text);
 }
 
+/* Bảng thông số trong modal chi tiết sản phẩm */
+.store-page .product-spec-table {
+  --bs-table-bg: var(--surface-high);
+  --bs-table-color: #fff;
+  --bs-table-border-color: var(--border);
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+  --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+  --bs-table-hover-color: #fff;
+  background-color: var(--surface-high);
+  color: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.store-page .product-spec-table th,
+.store-page .product-spec-table td {
+  color: #fff !important;
+  background-color: transparent;
+  border-color: var(--border);
+  padding: 0.65rem 1rem;
+  vertical-align: middle;
+}
+
+.store-page .product-spec-table th {
+  background-color: rgba(0, 0, 0, 0.25);
+  font-weight: 600;
+  width: 28%;
+}
+
+.store-page .product-spec-table tbody tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.store-page .product-spec-table tbody tr:hover td,
+.store-page .product-spec-table tbody tr:hover th {
+  background-color: rgba(5, 102, 217, 0.15);
+  color: #fff !important;
+}
+
 .store-page .text-muted {
   color: var(--text-muted) !important;
 }
