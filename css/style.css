@@ -1,0 +1,40 @@
+/* CSS bổ sung ngoài Bootstrap */
+
+body {
+  background-color: #f5f7fa;
+}
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.product-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+  background-color: #fff;
+}
+
+.product-price {
+  color: #d9534f;
+  font-weight: 600;
+}
+
+.star-rating {
+  color: #f5b301;
+}
+
+.compare-table th,
+.compare-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.review-card {
+  border-left: 4px solid #0d6efd;
+}
