@@ -1,13 +1,21 @@
 // Logic cho trang admin.html: CRUD sản phẩm, danh mục, duyệt review
+// Frontend middleware: chỉ admin mới vào được trang này
+
+if (requireAdmin()) {
+  $(function () {
+    const user = getCurrentUser();
+    if (user) {
+      $("#adminUserName").text(user.fullName || user.username);
+    }
+    $("#btnLogout").on("click", logout);
+    loadAll();
+    bindAdminEvents();
+  });
+}
 
 let adminProducts = [];
 let adminCategories = [];
 let adminReviews = [];
-
-$(function () {
-  loadAll();
-  bindAdminEvents();
-});
 
 function bindAdminEvents() {
   $("#btnAddProduct").on("click", () => openProductForm());

@@ -4,6 +4,10 @@ let allProducts = [];
 let allCategories = [];
 let compareList = [];
 
+function getAllProducts() {
+  return allProducts;
+}
+
 $(function () {
   loadCategories();
   loadProducts();
@@ -13,8 +17,36 @@ $(function () {
 
 function bindEvents() {
   $("#searchInput").on("input", renderProducts);
-  $("#categoryFilter").on("change", renderProducts);
+  $("#categoryFilter").on("change", function () {
+    syncCategoryUi($(this).val());
+    renderProducts();
+  });
   $("#sortFilter").on("change", renderProducts);
+
+  $(document).on("click", ".category-chip", function () {
+    const cat = $(this).data("category") || "";
+    $("#categoryFilter").val(cat);
+    syncCategoryUi(cat);
+    renderProducts();
+  });
+
+  $(document).on("click", ".category-menu-item", function (e) {
+    e.preventDefault();
+    const cat = $(this).data("category") || "";
+    $("#categoryFilter").val(cat);
+    syncCategoryUi(cat);
+    renderProducts();
+  });
+}
+
+function syncCategoryUi(categoryName) {
+  const name = categoryName || "";
+  $(".category-chip").removeClass("active");
+  $('.category-chip[data-category="' + name + '"]').addClass("active");
+  $(".category-menu-item").removeClass("active");
+  $('.category-menu-item[data-category="' + name + '"]').addClass("active");
+  $("#sectionTitle").text(name ? name : "Sản phẩm nổi bật");
+  $("#breadcrumbCategory").text(name || "Sản phẩm công nghệ");
 }
 
 async function loadProducts() {
@@ -31,11 +63,33 @@ function loadCategories() {
     .done(function (data) {
       allCategories = data || [];
       const $select = $("#categoryFilter");
+      const $menu = $("#navCategoryMenu");
+      const $chips = $("#categoryChips");
+
+      $select.find("option:not(:first)").remove();
+      $menu.find("li:not(:first)").remove();
+      $chips.empty();
+      $chips.append(
+        '<button type="button" class="category-chip active" data-category="">Tất cả</button>'
+      );
+
       allCategories.forEach((c) => {
         $select.append(
-          '<option value="' + escapeHtml(c.name) + '">' +
+          '<option value="' + escapeHtml(c.name) + '">' + escapeHtml(c.name) + "</option>"
+        );
+        $menu.append(
+          '<li><a class="dropdown-item category-menu-item" href="#" data-category="' +
             escapeHtml(c.name) +
-            "</option>"
+            '">' +
+            escapeHtml(c.name) +
+            "</a></li>"
+        );
+        $chips.append(
+          '<button type="button" class="category-chip" data-category="' +
+            escapeHtml(c.name) +
+            '">' +
+            escapeHtml(c.name) +
+            "</button>"
         );
       });
     })
@@ -84,25 +138,22 @@ function renderProducts() {
   }
 
   list.forEach((p) => {
-    const spec = [p.cpu, p.ram].filter(Boolean).join(" · ");
     const html =
-      '<div class="product-col">' +
-      '  <div class="card product-card" data-id="' + p.id + '">' +
-      '    <img src="' + escapeHtml(p.image || "img/no-image.png") + '" class="card-img-top" alt="">' +
-      '    <div class="card-body d-flex flex-column">' +
-      '      <span class="badge bg-secondary align-self-start mb-2">' +
-      escapeHtml(p.category || "") +
-      "</span>" +
-      '      <h6 class="card-title fw-bold">' + escapeHtml(p.name) + "</h6>" +
-      (spec
-        ? '<p class="small text-muted mb-2">' + escapeHtml(spec) + "</p>"
-        : "") +
-      '      <p class="product-price mb-3">' + formatMoney(p.price) + "</p>" +
-      '      <div class="mt-auto d-flex gap-2">' +
-      '        <button type="button" class="btn btn-sm btn-detail flex-grow-1">Chi tiết</button>' +
-      '        <button type="button" class="btn btn-sm btn-outline-secondary btn-compare rounded-circle px-2" title="So sánh">' +
-      '<i class="bi bi-bar-chart"></i></button>' +
-      "      </div>" +
+      '<div class="col-6 col-md-4 col-lg-2 product-col">' +
+      '  <div class="product-card-pa product-card" data-id="' + p.id + '">' +
+      '    <div class="product-img-wrap btn-detail" role="button" tabindex="0">' +
+      '      <img src="' + escapeHtml(p.image || "img/no-image.png") + '" alt="">' +
+      "    </div>" +
+      '    <h3 class="product-name btn-detail" role="button" tabindex="0">' +
+      escapeHtml(p.name) +
+      "</h3>" +
+      '    <div class="product-price-pa">' + formatMoney(p.price) + "</div>" +
+      '    <div class="product-meta-pa">' +
+      '      <span class="stock-ok"><i class="bi bi-check-lg"></i> Có hàng</span>' +
+      '      <button type="button" class="btn-link-pa btn-add-cart" data-id="' +
+      p.id +
+      '"><i class="bi bi-cart3"></i> Giỏ hàng</button>' +
+      '      <button type="button" class="btn-link-pa btn-compare"><i class="bi bi-plus-lg"></i> So sánh</button>' +
       "    </div>" +
       "  </div>" +
       "</div>";
@@ -146,6 +197,9 @@ async function openProductDetail(id) {
       specRow("CPU", product.cpu) +
       specRow("RAM", product.ram) +
       "    </table>" +
+      '    <button type="button" class="btn btn-pa-red mt-3 btn-add-cart" data-id="' +
+      product.id +
+      '"><i class="bi bi-cart-plus"></i> Thêm vào giỏ</button>' +
       "  </div>" +
       "</div>";
     $("#productModalTitle").text(product.name);

@@ -1,6 +1,25 @@
 // Tập trung các hàm gọi API (Fetch + jQuery AJAX)
 
 const BASE_URL = "https://6a1641f81b90031f81b0d673.mockapi.io";
+const USERS_URL = "https://6a3163527bc5e1c61265aaba.mockapi.io";
+
+// ---------- Tài khoản (dùng Fetch) ----------
+
+async function getUsers() {
+  const res = await fetch(USERS_URL + "/user");
+  if (!res.ok) throw new Error("Không tải được danh sách tài khoản");
+  return res.json();
+}
+
+async function updateUserCart(userId, cart) {
+  const res = await fetch(USERS_URL + "/user/" + userId, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cart: cart }),
+  });
+  if (!res.ok) throw new Error("Không cập nhật được giỏ hàng");
+  return res.json();
+}
 
 // ---------- Sản phẩm (dùng Fetch) ----------
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gadget Store - Trang chủ</title>
+  <title>Gadget Store - Linh kiện máy tính</title>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -15,111 +15,175 @@
   />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="store-page">
-  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<body class="gadget-page">
+  <!-- Header -->
+  <header class="site-header sticky-top">
+    <div class="container py-3">
+      <div class="row align-items-center g-3">
+        <div class="col-lg-2 col-md-3 text-center text-md-start">
+          <a href="index.html" class="site-logo d-inline-block">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd5cGsepxS1bYT6AdaBGCxRY-_VisZCxMRuA&s"
+              alt="Gadget Store"
+              class="site-logo-img"
+            />
+          </a>
+        </div>
+        <div class="col-lg-5 col-md-9">
+          <form class="header-search" onsubmit="return false;">
+            <div class="input-group header-search-group">
+              <input
+                id="searchInput"
+                type="text"
+                class="form-control"
+                placeholder="Nhập từ khóa tìm kiếm..."
+              />
+              <select id="categoryFilter" class="form-select header-search-select">
+                <option value="">Tất cả danh mục</option>
+              </select>
+              <button type="button" class="btn btn-pa-red" title="Tìm kiếm">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-5">
+          <div class="header-actions d-flex flex-wrap justify-content-lg-end align-items-center gap-2">
+            <a href="tel:19001234" class="btn btn-pa-red btn-header-action">
+              <i class="bi bi-telephone-fill"></i>
+              <span class="d-none d-xl-inline">HOTLINE 1900 1234</span>
+            </a>
+            <a href="admin.html" class="btn btn-pa-red btn-header-action d-none d-md-inline-flex">
+              <i class="bi bi-pc-display"></i>
+              <span>BUILD PC</span>
+            </a>
+            <button
+              type="button"
+              id="btnNavCart"
+              class="btn btn-pa-red btn-header-action position-relative"
+              title="Giỏ hàng"
+            >
+              <i class="bi bi-cart3"></i>
+              <span class="d-none d-sm-inline">GIỎ HÀNG</span>
+              <span
+                id="cartBadge"
+                class="cart-badge position-absolute d-none"
+              >0</span>
+            </button>
+            <div id="navUserArea" class="d-flex align-items-center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav bar -->
+  <nav class="site-nav">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">
-        <i class="bi bi-cpu"></i> Gadget Store
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#mainNav"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#products">Sản phẩm</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#compare">So sánh</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#reviews">Đánh giá</a>
-          </li>
-        </ul>
-        <a href="admin.html" class="btn btn-outline-light btn-sm rounded-pill px-3">
-          <i class="bi bi-gear"></i> Quản trị
-        </a>
+      <div class="d-flex align-items-stretch flex-wrap">
+        <div class="nav-catalog dropdown">
+          <button
+            class="nav-catalog-btn dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-list"></i>
+            <span>DANH MỤC SẢN PHẨM</span>
+          </button>
+          <ul class="dropdown-menu" id="navCategoryMenu">
+            <li><a class="dropdown-item category-menu-item" href="#" data-category="">Tất cả</a></li>
+          </ul>
+        </div>
+        <div class="nav-trust d-none d-lg-flex align-items-center flex-grow-1">
+          <span><i class="bi bi-check-circle-fill text-pa-gold"></i> 100% chính hãng</span>
+          <span><i class="bi bi-currency-dollar text-pa-gold"></i> Giá ưu đãi</span>
+          <span><i class="bi bi-truck text-pa-gold"></i> Miễn phí vận chuyển</span>
+          <span><i class="bi bi-shield-check text-pa-gold"></i> Bảo hành nơi sử dụng</span>
+          <span><i class="bi bi-credit-card text-pa-gold"></i> Thanh toán linh hoạt</span>
+        </div>
+        <div class="nav-deal ms-auto">
+          <span>DEAL GIỜ VÀNG</span>
+        </div>
       </div>
     </div>
   </nav>
 
-  <header class="store-hero">
-    <div class="hero-orb" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="text-uppercase small text-muted mb-2 letter-spacing-2">
-        Công nghệ cao cấp
-      </p>
-      <h1 class="mb-3">
-        Khám phá thiết bị<br />
-        <span class="gradient-text">công nghệ hôm nay</span>
-      </h1>
-      <p class="text-muted mx-auto mb-0" style="max-width: 36rem">
-        Laptop, điện thoại và phụ kiện chính hãng — lọc, so sánh và xem đánh giá
-        thật từ khách hàng.
-      </p>
-    </div>
-  </header>
+  <main class="container py-4">
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb breadcrumb-pa mb-0">
+        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+        <li class="breadcrumb-item active" id="breadcrumbCategory">Sản phẩm công nghệ</li>
+      </ol>
+    </nav>
 
-  <div class="container mb-4">
-    <div class="filter-bar">
-      <div class="row g-2 align-items-center">
-        <div class="col-lg-5">
-          <div class="input-group">
-            <span class="input-group-text bg-transparent border-secondary text-muted">
-              <i class="bi bi-search"></i>
-            </span>
-            <input
-              id="searchInput"
-              type="text"
-              class="form-control border-secondary"
-              placeholder="Tìm kiếm sản phẩm..."
-            />
-          </div>
+    <!-- Hero banners -->
+    <section class="row g-3 mb-4 hero-banners">
+      <div class="col-md-6">
+        <div class="hero-banner-wrap">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkCMpiVbBmm_EYQHLFKnozG3t7PN2G35mm_kgAt_pcqUxn0KNl7ymlhcSOIowZyEBhYdfCc8yPtDqo5Y8Xa0Ia660quvKWLkeebJnctOjrIFnJjJWCB0SGzWwIbQovo-WDEmvbyzvzsrw9MUp0dP3fi62RBsHPFYL2YgrvInuLOyjGpMZ_1jw0eGp2V4QFC1rw98g3QY2_MvMJJyLDTBiL_YhEwcajvjDoTOgyzX0vupqgFqigkwk0_H7dTAJ51Ln-wYG3pOl2iSM"
+            alt="Build PC"
+            class="img-fluid rounded"
+          />
         </div>
-        <div class="col-md-4 col-lg-3">
-          <select id="categoryFilter" class="form-select">
-            <option value="">Tất cả danh mục</option>
-          </select>
+      </div>
+      <div class="col-md-6">
+        <div class="hero-banner-wrap">
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC98_2xHYx3SWLN2CLjZZ1yX7sKc-0BVRD7FgVMlhDNAqd3W-Yh5Anv_nJ74iCOMNAAjJh9CqL0DGwH_Kijt_sFPWJMU3tFgxLt6M6mrirhb4KYA9LuxCCX1q0fECpnFLJUjWkW_EXYEQQ8RxRRWooqNW7gUEqL-SMqjbqB9W15YtQqOpuKu7xaEpiXQdP1yZCDsDoaG09AHulRsnPH1CBsa4sbXpF9_qkhDazGe0qGdpw_5oHGSyPtOavG_Vf9cXLJ8Y6XUD_r_eM"
+            alt="Bảo hành"
+            class="img-fluid rounded"
+          />
         </div>
-        <div class="col-md-4 col-lg-3">
-          <select id="sortFilter" class="form-select">
+      </div>
+    </section>
+
+    <!-- Category chips -->
+    <section class="category-chips mb-4" id="categoryChips"></section>
+
+    <!-- Products -->
+    <section id="products" class="mb-5">
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+        <h2 class="section-heading mb-0" id="sectionTitle">Sản phẩm nổi bật</h2>
+        <div class="d-flex align-items-center gap-2">
+          <select id="sortFilter" class="form-select form-select-sm sort-select">
             <option value="">Sắp xếp</option>
             <option value="priceAsc">Giá tăng dần</option>
             <option value="priceDesc">Giá giảm dần</option>
             <option value="nameAsc">Tên A-Z</option>
           </select>
+          <span id="productCount" class="text-muted small"></span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <main class="container pb-5">
-    <section id="products" class="mb-5">
-      <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
-        <h2 class="section-title mb-0">Sản phẩm nổi bật</h2>
-        <span id="productCount" class="text-muted"></span>
-      </div>
-      <div id="productList"></div>
+      <div id="productList" class="row g-2 product-list"></div>
     </section>
 
     <section id="compare" class="mb-5">
-      <h2 class="section-title">So sánh sản phẩm</h2>
-      <div id="compareBox" class="panel-box table-responsive">
-        <p class="text-muted mb-0">Chọn tối đa 3 sản phẩm để so sánh.</p>
+      <h2 class="section-heading">So sánh sản phẩm</h2>
+      <div id="compareBox" class="panel-box">
+        <p class="text-muted mb-0">Chọn tối đa 3 sản phẩm (nút So sánh trên thẻ) để so sánh.</p>
       </div>
     </section>
 
     <section id="reviews">
-      <h2 class="section-title">Đánh giá mới nhất</h2>
+      <h2 class="section-heading">Đánh giá mới nhất</h2>
       <div id="reviewList" class="row g-3"></div>
     </section>
   </main>
 
+  <footer class="site-footer py-4">
+    <div class="container text-center">
+      <div class="fw-bold mb-1">Gadget Store</div>
+      <small class="text-muted">&copy; 2026 Gadget Store. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <button type="button" class="btn-support" title="Hỗ trợ">
+    <i class="bi bi-chat-dots-fill"></i> Hỗ trợ
+  </button>
+
+  <!-- Modals -->
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
@@ -132,19 +196,62 @@
     </div>
   </div>
 
-  <footer class="store-footer text-center py-4 mt-4">
-    <div class="container">
-      <div class="fw-bold text-white mb-1">
-        <i class="bi bi-cpu"></i> Gadget Store
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Đăng nhập</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted small">Đăng nhập để thêm sản phẩm vào giỏ hàng.</p>
+          <form id="modalLoginForm" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="modalUsername">Tên đăng nhập</label>
+              <input id="modalUsername" type="text" class="form-control" required autocomplete="username" />
+              <div class="invalid-feedback">Vui lòng nhập tên đăng nhập.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="modalPassword">Mật khẩu</label>
+              <input id="modalPassword" type="password" class="form-control" required autocomplete="current-password" />
+              <div class="invalid-feedback">Vui lòng nhập mật khẩu.</div>
+            </div>
+            <button type="submit" id="btnModalLogin" class="btn btn-pa-red w-100">
+              <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+            </button>
+          </form>
+          <div class="text-center mt-3">
+            <a href="login.html" class="small text-muted">Mở trang đăng nhập đầy đủ</a>
+          </div>
+        </div>
       </div>
-      <small>&copy; 2026 Gadget Store. All rights reserved.</small>
     </div>
-  </footer>
+  </div>
+
+  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-cart3"></i> Giỏ hàng của bạn</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="cartModalBody"></div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    $(function () {
+      updateNavAuth();
+      updateCartBadge();
+    });
+  </script>
 </body>
 </html>
